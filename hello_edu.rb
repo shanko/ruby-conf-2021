@@ -13,7 +13,7 @@ SEND_IP   = '192.168.0.' # Defined by TP-LINK
 IP_1 = SEND_IP + (ARGV[0] || '101')
 IP_2 = SEND_IP + (ARGV[1] || '102')
 
-# Create a Sockets that we'll send the command to
+# Create UDP sockets that we'll send the command to
 $sock_1 = Socket.pack_sockaddr_in(SEND_PORT, IP_1)
 $sock_2 = Socket.pack_sockaddr_in(SEND_PORT, IP_2)
 
@@ -65,14 +65,14 @@ def receive
   end
 end
 
-def capture_video
+def capture_video(milli_seconds)
   return if ($error || (RUBY_PLATFORM != 'arm-linux-gnueabihf'))
 
   get_camera_status = `vcgencmd get_camera`.strip
   return if (get_camera_status != 'supported=1 detected=1')
 
   Thread.new do
-    cmd = 'capture_vdo.sh 25000'
+    cmd = "capture_vdo.sh #{milli_seconds}"
     sleep(0.1) ## so that the main thread gets scheduled
     puts `#{cmd}`
   end
@@ -85,11 +85,11 @@ th = Thread.new { receive }
 # Put Tello into command mode
 send(['command'], 2)
 
+# start video capture if possible
+capture_video(27 * 1000) ## a couple of seconds > sum of the delays in commands below
+
 # Get battery levels
 send(['battery?'], 2)
-
-# start video capture if possible
-capture_video
 
 # Send the takeoff command
 send(['takeoff'], 7)
