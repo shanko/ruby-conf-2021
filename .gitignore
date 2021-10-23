@@ -1,0 +1,7 @@
+Tello-Python/
+tello_video/
+tello_gem/
+/log/*
+/tmp/*
+*.pdf
+/videos/*.mp4
