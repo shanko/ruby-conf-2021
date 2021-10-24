@@ -86,7 +86,7 @@ th = Thread.new { receive }
 send(['command'], 2)
 
 # start video capture if possible
-capture_video(27 * 1000) ## a couple of seconds > sum of the delays in commands below
+capture_video((2+7+2) * 1000) ## sum of the delays in commands below
 
 # Get battery levels
 send(['battery?'], 2)
@@ -95,10 +95,10 @@ send(['battery?'], 2)
 send(['takeoff'], 7)
 
 # Flip
-send(['cw 90','ccw 90'], 7)
+#send(['cw 90','ccw 90'], 7)
 
 # Flip again
-send(['ccw 90','cw 90'], 7)
+#send(['ccw 90','cw 90'], 7)
 
 # Land
 send(['land'], 2)
