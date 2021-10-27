@@ -2,12 +2,12 @@
 ## Adapted from Python:
 #   https://raw.githubusercontent.com/dbaldwin/DroneBlocks-TelloEDU-Python/master/swarm-box-mission.py
 #
-## Ruby script to connect to two EDU drones and control them simultaneously
+## Ruby script to connect to two TelloEDU drones and control them simultaneously
 
 require 'socket'
 require 'time'
 
-SEND_PORT = 8889 # Defined by Tello
+SEND_PORT = 8889         # Defined by Tello
 SEND_IP   = '192.168.0.' # Defined by TP-LINK
 
 IP_1 = SEND_IP + (ARGV[0] || '101')
@@ -65,6 +65,8 @@ def receive
   end
 end
 
+## Capture Video of the flying drones if connected to 
+## Raspberry Pi with camera
 def capture_video(milli_seconds)
   return if ($error || (RUBY_PLATFORM != 'arm-linux-gnueabihf'))
 
@@ -79,7 +81,8 @@ def capture_video(milli_seconds)
 end
 
 # Create and start a listening thread that runs in the background
-# This utilizes our receive functions and will continuously monitor for incoming messages
+# This utilizes our receive functions and will continuously 
+# monitor for incoming messages
 th = Thread.new { receive }
 
 # Put Tello into command mode

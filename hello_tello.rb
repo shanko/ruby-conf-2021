@@ -1,6 +1,5 @@
-# Ruby script to connect to 2 EDU drones and control them simultaneously: basic takeoff and land
 
-# Adapted from Python: https://raw.githubusercontent.com/dbaldwin/DroneBlocks-TelloEDU-Python/master/swarm-box-mission.py
+# Ruby script to connect to a Tello drone: basic takeoff and land
 
 require 'socket'
 require 'time'
@@ -11,7 +10,8 @@ PORT = 8889
 BUFF_LEN = 1518
 
 # Create UDP sockets which will recieve the response on any other port
-$udps = UDPSocket.new; $udps.bind('0.0.0.0', 9001)
+$udps = UDPSocket.new
+$udps.bind('0.0.0.0', 9001)
 
 # Send the message to Tello and allow for a delay in seconds
 def send(message, delay)
@@ -36,14 +36,13 @@ end
 def receive
   # Continuously loop and listen for incoming messages
   while true
-    # Try to receive the message otherwise print the exception
     begin
       resp, sender = $udps.recvfrom(BUFF_LEN)
       puts("Received message: '#{resp.to_s.chomp}' from #{sender}")
     rescue Exception => e
       # If there's an error close the socket and break out of the loop
       $udps.close
-      # puts("Error receiving message: " + e.to_s)
+      puts("Error receiving message: " + e.to_s) if $DEBUG
       break
     end
   end
@@ -67,8 +66,8 @@ send("time?", 2)
 send("takeoff", 8)
 
 # Flip
-send("flip l", 8)
-send("flip r", 8)
+# send("flip l", 8)
+# send("flip r", 8)
 
 # Land
 send("land", 4)

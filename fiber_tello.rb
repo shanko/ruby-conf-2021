@@ -8,11 +8,9 @@ else
 end
 
 # Uses fibers instead of threads for communication with Tello
-
 class Tello
 
-  MAX_RETRY    = 3               ## Max number of re-tries on fetching the response
-  FIXED_IP     = '192.168.10.1'  ## IP if the Tello is in SINGLE mode
+  FIXED_IP     = '192.168.10.1'  ## Defined by Tello
   COMMAND_PORT = 8889            ## Port to which command  is sent - fixed by Tello firmware
   RESPOND_PORT = 9000            ## Port on which response is received - can be any other port
 
@@ -44,7 +42,7 @@ class Tello
     p({tello_ip: tello_ip, port: RESPOND_PORT})
     me = self.new(tello_ip)
     me.receiver
-    # sleep(0.1)
+
     if block_given?
       me.do('command')
       me.do('battery?')
@@ -73,7 +71,6 @@ class Tello
 
   def close
     self.do('land')
-    #@udps.send('land', 0, @sockaddr)
     puts '# close Tello'
     @udps.close
   end
