@@ -86,22 +86,23 @@ end
 th = Thread.new { receive }
 
 # Put Tello into command mode
-send(['command'], 2)
+send(['command'], 1)
 
 # start video capture if possible
-capture_video((2+7+2) * 1000) ## sum of the delays in commands below
+capture_video((1+7+2) * 1000) ## sum of the delays in commands below
 
 # Get battery levels
-send(['battery?'], 2)
+send(['battery?'], 1)
 
 # Send the takeoff command
 send(['takeoff'], 7)
 
 # Flip
-#send(['cw 90','ccw 90'], 7)
+# send(['flip r','flip l'], 7)
 
 # Flip again
-#send(['ccw 90','cw 90'], 7)
+# send(['flip l','flip r'], 7)
+# send(['ccw 90','cw 90'], 4)
 
 # Land
 send(['land'], 2)
