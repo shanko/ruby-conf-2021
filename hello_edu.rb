@@ -1,7 +1,4 @@
 
-## Adapted from Python:
-#   https://raw.githubusercontent.com/dbaldwin/DroneBlocks-TelloEDU-Python/master/swarm-box-mission.py
-#
 ## Ruby script to connect to two TelloEDU drones and control them simultaneously
 
 require 'socket'

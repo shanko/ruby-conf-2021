@@ -5,3 +5,4 @@ tello_gem/
 /tmp/*
 *.pdf
 /videos/*.mp4
+/config/*.json

@@ -19,9 +19,9 @@ class Tello
   def initialize(tello_ip)
     @fiber    = nil
     @swarm    = (tello_ip == FIXED_IP)
-    @udps     = UDPSocket.open
     @sockaddr = Socket.pack_sockaddr_in(COMMAND_PORT, tello_ip)
-    port      = RESPOND_PORT # +1+rand(500)
+    port      = RESPOND_PORT
+    @udps     = UDPSocket.open
     @udps.bind('0.0.0.0', port)
   end
 
@@ -139,8 +139,8 @@ if __FILE__ == $0
   Tello.create(*ARGV) do |tello|
     ## Do something
     tello.do('cw 90')
-    tello.do('ccw 90')
-    tello.do('flip l')
-    tello.do('flip r')
+    # tello.do('ccw 90')
+    # tello.do('flip l')
+    # tello.do('flip r')
   end
 end

@@ -1,7 +1,5 @@
-# https://github.com/katoy/dron-tello/blob/master/tello.rb
-require 'socket'
-
 ## Ruby 2.x script to control Tello drones using Threads
+require 'socket'
 
 class Tello
   def initialize(local)
