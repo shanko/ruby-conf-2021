@@ -62,7 +62,7 @@ def receive
   end
 end
 
-## Capture Video of the flying drones if connected to 
+## Capture Video of the flying drones if connected to
 ## Raspberry Pi with camera
 def capture_video(milli_seconds)
   return if ($error || (RUBY_PLATFORM != 'arm-linux-gnueabihf'))
@@ -78,7 +78,7 @@ def capture_video(milli_seconds)
 end
 
 # Create and start a listening thread that runs in the background
-# This utilizes our receive functions and will continuously 
+# This utilizes our receive functions and will continuously
 # monitor for incoming messages
 th = Thread.new { receive }
 
@@ -95,11 +95,12 @@ send(['battery?'], 1)
 send(['takeoff'], 7)
 
 # Flip
-# send(['flip r','flip l'], 7)
+send(['flip r','flip l'], 7)
 
 # Flip again
-# send(['flip l','flip r'], 7)
-# send(['ccw 90','cw 90'], 4)
+send(['flip l','flip r'], 7)
+
+send(['ccw 90','cw 90'], 4)
 
 # Land
 send(['land'], 2)
