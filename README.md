@@ -8,3 +8,6 @@
 
 ### Tello
 * https://www.ryzerobotics.com/tello
+
+stdate@gmail.com
+
