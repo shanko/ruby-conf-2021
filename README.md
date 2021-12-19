@@ -10,5 +10,5 @@
 ### Tello
 * https://www.ryzerobotics.com/tello
 
-stdate@gmail.com
+EMail: stdate@gmail.com
 
